@@ -8,7 +8,7 @@ FROM golang:1.21 as base
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the go.mod and go.sum files to the working directory
+# Copy the go.mod and go.sum files to the working directory as dependencies for go is stored in go.mod file
 COPY go.mod ./
 
 # Download all the dependencies
