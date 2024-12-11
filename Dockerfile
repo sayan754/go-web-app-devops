@@ -8,10 +8,10 @@ FROM golang:1.21 as base
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the go.mod and go.sum files to the working directory as go.mod file has all dependencies for go application
+# Copy the go.mod and go.sum files to the working directory as go.mod file has all dependencies for go application like requirements.txt file in python
 COPY go.mod ./
 
-# Download all the dependencies
+# Download all the dependencies for the app if any then the below command is handy like pip install -r requirements.txt file in python
 RUN go mod download
 
 # Copy the source code to the working directory
