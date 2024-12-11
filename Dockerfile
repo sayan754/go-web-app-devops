@@ -21,14 +21,14 @@ COPY . .
 RUN go build -o main .
 
 #######################################################
-# Reduce the image size using multi-stage builds
+# Reduce the image size and security using multi-stage builds
 # We will use a distroless image to run the application
 FROM gcr.io/distroless/base
 
-# Copy the binary from the previous stage
+# Copy the binary from the previous stage copying the 'main' binary from '/app' directory of base stage and . is drfault directory i.e /app only
 COPY --from=base /app/main .
 
-# Copy the static files from the previous stage
+# Copy the static files from the previous stage and ./static name is static as well to By using the same name (static), the application's runtime logic doesn't need to change between the build and runtime stages. For example, if the app expects static files in a directory called static, keeping the same name ensures seamless operation.
 COPY --from=base /app/static ./static
 
 # Expose the port on which the application will run
